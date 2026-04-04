@@ -10,5 +10,9 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
+# تغطية باقي محركات البحث الأخرى
 User-agent: *
 Allow: /
+
+# رابط خريطة الموقع
+Sitemap: https://tungsten-media.com/sitemap.xml
