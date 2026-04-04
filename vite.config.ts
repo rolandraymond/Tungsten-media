@@ -1,11 +1,14 @@
-import { defineConfig, PluginOption } from "vite"; // أضفنا PluginOption
+import { defineConfig, PluginOption } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
+import { cloudflare } from "@cloudflare/vite-plugin"; // أضف هذا الاستيراد
 
 export default defineConfig(({ mode }) => {
-  // حددنا نوع المصفوفة عشان نرضي TypeScript
-  const plugins: PluginOption[] = [react()];
+  const plugins: PluginOption[] = [
+    cloudflare(), // أضف هذا السطر
+    react(),
+  ];
   
   if (mode === "development") {
     plugins.push(componentTagger());
@@ -19,7 +22,7 @@ export default defineConfig(({ mode }) => {
         overlay: false,
       },
     },
-    plugins: plugins, // الآن Plugins أصبحت مصفوفة صحيحة
+    plugins: plugins,
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "./src"),
