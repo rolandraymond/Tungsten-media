@@ -1,0 +1,282 @@
+/* -------------------------------------------------------------------------- */
+/* 1. FONTS & EXTERNAL ASSETS                                                 */
+/* -------------------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Cairo:wght@200..1000&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* -------------------------------------------------------------------------- */
+/* 2. CORE VARIABLES (Shadcn + Tungsten System)                               */
+/* -------------------------------------------------------------------------- */
+@layer base {
+  :root {
+    /* --- Light Mode (The Blueprint) --- */
+    --background: 0 0% 96%;
+    --foreground: 220 20% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 10%;
+
+    /* Tungsten Golden Glow */
+    --primary: 45 93% 47%;
+    --primary-foreground: 220 20% 10%;
+    --primary-rgb: 251, 191, 36;
+
+    --secondary: 220 10% 90%;
+    --secondary-foreground: 220 20% 10%;
+
+    --muted: 220 10% 93%;
+    --muted-foreground: 220 10% 40%;
+
+    --accent: 45 93% 57%;
+    --accent-foreground: 220 20% 10%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 10% 88%;
+    --input: 220 10% 88%;
+    --ring: 45 93% 47%;
+
+    --radius: 1.25rem;
+    
+    /* Smooth Transitions */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .dark {
+    /* --- Dark Mode (The Stealth) --- */
+    --background: 0 0% 7%;
+    --foreground: 0 0% 95%;
+
+    --card: 0 0% 9%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 45 93% 47%;
+    --primary-foreground: 0 0% 5%;
+
+    --secondary: 0 0% 14%;
+    --secondary-foreground: 0 0% 90%;
+
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 55%;
+
+    --accent: 45 93% 57%;
+    --accent-foreground: 0 0% 5%;
+
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 45 93% 47%;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* 3. BASE STYLES & RESET                                                     */
+/* -------------------------------------------------------------------------- */
+@layer base {
+  * {
+    @apply border-border outline-none ring-offset-background;
+  }
+
+  html {
+    /* Lenis Optimized */
+    scroll-behavior: auto !important;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    cursor: none; /* For Custom Cursor */
+    overscroll-behavior-y: none;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.3);
+    color: hsl(var(--foreground));
+  }
+
+  /* Typography RTL Handling */
+  [dir="rtl"] {
+    font-family: 'Cairo', sans-serif;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* 4. PROFESSIONAL UTILITIES (Combined & Refined)                             */
+/* -------------------------------------------------------------------------- */
+@layer utilities {
+  /* Glow Effects */
+  .text-glow {
+    text-shadow: 0 0 20px hsl(var(--primary) / 0.5), 0 0 40px hsl(var(--primary) / 0.2);
+  }
+
+  .box-glow {
+    box-shadow: 0 0 25px hsl(var(--primary) / 0.15), 0 0 50px hsl(var(--primary) / 0.05);
+  }
+
+  .box-glow-strong {
+    box-shadow: 0 0 40px hsl(var(--primary) / 0.3), 0 0 80px hsl(var(--primary) / 0.1);
+  }
+
+  /* Branding */
+  .gradient-tungsten {
+    background: linear-gradient(135deg, hsl(45 93% 47%), hsl(45 97% 64%));
+  }
+
+  /* Motion Utilities */
+  .perspective-1000 { perspective: 1000px; }
+  .perspective-2000 { perspective: 2000px; }
+
+  .mask-text-reveal {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    overflow: hidden;
+  }
+
+  /* --- ONE-SHOT GLITCH (The Masterpiece) --- */
+  .glitch-once {
+    @apply relative inline-block;
+    animation: text-reveal-clean 1.2s var(--ease-out-expo) forwards;
+  }
+
+  .glitch-once::before,
+  .glitch-once::after {
+    content: attr(data-text);
+    @apply absolute inset-0 bg-transparent opacity-0 pointer-events-none;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .glitch-once::before {
+    left: 4px;
+    text-shadow: -3px 0 #00fff9;
+    animation: glitch-anim-pro-1 0.8s 0.1s var(--ease-out-expo) both;
+  }
+
+  .glitch-once::after {
+    left: -4px;
+    text-shadow: 3px 0 #ff00c1;
+    animation: glitch-anim-pro-2 0.8s 0.1s var(--ease-out-expo) both;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* 5. GLOBAL ANIMATIONS & KEYFRAMES                                           */
+/* -------------------------------------------------------------------------- */
+@keyframes scan {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(100%); }
+}
+
+.animate-scan {
+  animation: scan 3s linear infinite;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+
+/* Glitch Core Keyframes */
+@keyframes text-reveal-clean {
+  0% { opacity: 0; transform: translateY(10px); filter: blur(8px); }
+  100% { opacity: 1; transform: translateY(0); filter: blur(0px); }
+}
+
+@keyframes glitch-anim-pro-1 {
+  0% { opacity: 1; transform: translate(0); clip-path: inset(40% 0 61% 0); }
+  20% { transform: translate(-8px, 4px); clip-path: inset(92% 0 1% 0); }
+  40% { transform: translate(-8px, -4px); clip-path: inset(10% 0 86% 0); }
+  60% { transform: translate(8px, 4px); clip-path: inset(80% 0 3% 0); }
+  80% { transform: translate(8px, -4px); clip-path: inset(50% 0 45% 0); }
+  100% { opacity: 0; transform: translate(0); clip-path: inset(0 0 0 0); }
+}
+
+@keyframes glitch-anim-pro-2 {
+  0% { opacity: 1; transform: translate(0); clip-path: inset(10% 0 80% 0); }
+  20% { transform: translate(8px, -4px); clip-path: inset(30% 0 60% 0); }
+  40% { transform: translate(8px, 4px); clip-path: inset(60% 0 20% 0); }
+  60% { transform: translate(-8px, -4px); clip-path: inset(85% 0 5% 0); }
+  80% { transform: translate(-8px, 4px); clip-path: inset(15% 0 75% 0); }
+  100% { opacity: 0; transform: translate(0); clip-path: inset(0 0 0 0); }
+}
+
+/* -------------------------------------------------------------------------- */
+/* 6. LENIS SMOOTHING (High Performance)                                      */
+/* -------------------------------------------------------------------------- */
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+@layer utilities {
+  .glitch-once {
+    @apply relative inline-block;
+    /* إضافة هزة خفيفة للنص الأصلي كمان */
+    animation: text-reveal-clean 1.2s var(--ease-out-expo) forwards, 
+               main-shake 0.8s 0.1s var(--ease-out-expo) both;
+  }
+
+  .glitch-once::before {
+    /* زيادة الـ shadow والمسافة */
+    left: 10px; 
+    text-shadow: -6px 0 #00fff9, 2px 2px #ff00c1;
+    animation: glitch-anim-pro-1 0.7s 0.1s steps(2, end) both;
+  }
+
+  .glitch-once::after {
+    /* زيادة الـ shadow والمسافة */
+    left: -10px;
+    text-shadow: 6px 0 #ff00c1, -2px -2px #00fff9;
+    animation: glitch-anim-pro-2 0.7s 0.1s steps(2, end) both;
+  }
+
+  /* هزة للنص الأساسي عشان الجليتش ميبقاش "معزول" */
+  @keyframes main-shake {
+    0%, 100% { transform: translate(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translate(-2px, 1px); }
+    20%, 40%, 60%, 80% { transform: translate(2px, -1px); }
+  }
+
+  @keyframes glitch-anim-pro-1 {
+    0% { opacity: 1; transform: translate(0); clip-path: inset(20% 0 50% 0); }
+    25% { transform: translate(-15px, 10px); clip-path: inset(80% 0 1% 0); }
+    50% { transform: translate(15px, -10px); clip-path: inset(10% 0 70% 0); }
+    75% { transform: translate(-10px, 5px); clip-path: inset(40% 0 40% 0); }
+    100% { opacity: 0; transform: translate(0); clip-path: inset(0 0 0 0); }
+  }
+
+  @keyframes glitch-anim-pro-2 {
+    0% { opacity: 1; transform: translate(0); clip-path: inset(70% 0 10% 0); }
+    25% { transform: translate(15px, -10px); clip-path: inset(15% 0 80% 0); }
+    50% { transform: translate(-15px, 10px); clip-path: inset(50% 0 15% 0); }
+    75% { transform: translate(10px, -5px); clip-path: inset(5% 0 90% 0); }
+    100% { opacity: 0; transform: translate(0); clip-path: inset(0 0 0 0); }
+  }
+}
