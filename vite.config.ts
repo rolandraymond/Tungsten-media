@@ -1,22 +1,41 @@
-import { defineConfig } from "vite";
+import { defineConfig, PluginOption } from "vite"; // أضفنا PluginOption
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
-// https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
-  server: {
-    host: "::",
-    port: 8080,
-    hmr: {
-      overlay: false,
+export default defineConfig(({ mode }) => {
+  // حددنا نوع المصفوفة عشان نرضي TypeScript
+  const plugins: PluginOption[] = [react()];
+  
+  if (mode === "development") {
+    plugins.push(componentTagger());
+  }
+
+  return {
+    server: {
+      host: "::",
+      port: 8080,
+      hmr: {
+        overlay: false,
+      },
     },
-  },
-  plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
+    plugins: plugins, // الآن Plugins أصبحت مصفوفة صحيحة
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "./src"),
+      },
+      dedupe: [
+        "react", 
+        "react-dom", 
+        "react/jsx-runtime", 
+        "react/jsx-dev-runtime", 
+        "@tanstack/react-query", 
+        "@tanstack/query-core"
+      ],
     },
-    dedupe: ["react", "react-dom", "react/jsx-runtime", "react/jsx-dev-runtime", "@tanstack/react-query", "@tanstack/query-core"],
-  },
-}));
+    build: {
+      outDir: "dist",
+      emptyOutDir: true,
+    }
+  };
+});
