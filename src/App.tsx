@@ -1,13 +1,13 @@
 import { lazy, Suspense, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
-import { HelmetProvider, Helmet } from "react-helmet-async"; // 🚀 تمت إضافة Helmet
+import { HelmetProvider, Helmet } from "react-helmet-async";
 import { AnimatePresence } from "framer-motion";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { LangProvider } from "@/lib/context-language";
 import { ThemeProvider } from "@/lib/context-theme";
 import { TrackingProvider } from "@/lib/tracking-provider";
-import { useTranslation } from "@/hooks/use-translation"; // 🚀 استدعاء الترجمة لتغيير لغة الـ HTML
+import { useTranslation } from "@/hooks/use-translation";
 
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -28,29 +28,77 @@ const NotFound = lazy(() => import("@/pages/NotFound"));
 const queryClient = new QueryClient();
 
 // ==========================================
-// 1. Global SEO Component (الإضافة الجديدة)
+// 1. Global SEO Component (النسخة الاحترافية)
 // ==========================================
 const GlobalSeo = () => {
   const { lang } = useTranslation();
+  const location = useLocation(); // 🚀 جلب المسار الحالي لإنشاء الروابط الديناميكية
+  
   const isAr = lang === "ar";
+  const siteName = "Tungsten Media Agency";
+  const currentUrl = `https://tungsten-media.com${location.pathname}`;
+
+  // 🚀 نصوص مخصصة حسب اللغة لضمان أرشفة صحيحة في جوجل العربي والإنجليزي
+  const defaultTitle = isAr 
+    ? "تونجستين ميديا | وكالة تسويق رقمي وحلول برمجيات" 
+    : "Tungsten Media Agency | Digital Marketing & Software Solutions";
+    
+  const description = isAr 
+    ? "تونجستين ميديا هي وكالتك المتكاملة للتسويق الرقمي، تطوير المواقع، وحلول السوفتوير الذكية. نصنع تجارب رقمية تضاعف نمو أعمالك." 
+    : "Tungsten Media is your full-service agency for digital marketing, web development, and smart software solutions. We craft digital experiences that multiply your business growth.";
+
+  const keywords = isAr
+    ? "تسويق رقمي, ديجيتال ماركتنج, تطوير برمجيات, تصميم مواقع, Tungsten Media Agency, حلول سوفتوير"
+    : "Digital Marketing, Software Development, Web Design, Tungsten Media Agency, Software Solutions";
+
+  // 🚀 WebSite Schema ليظهر الموقع بشكل احترافي مع مربع بحث في نتائج جوجل
+  const schemaMarkup = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": siteName,
+    "url": "https://tungsten-media.com/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://tungsten-media.com/search?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  };
 
   return (
     <Helmet 
-      // 🚀 الأهم للـ SEO: إخبار جوجل بلغة الصفحة واتجاهها ديناميكياً
       htmlAttributes={{ 
         lang: isAr ? "ar" : "en", 
         dir: isAr ? "rtl" : "ltr" 
       }}
-      // 🚀 القالب الافتراضي لعناوين الصفحات (مثلاً: About | Tungsten)
-      titleTemplate="%s | Tungsten"
-      defaultTitle={isAr ? "تنجستن | وكالة رقمية إبداعية" : "Tungsten | Creative Digital Agency"}
+      titleTemplate={`%s | ${siteName}`}
+      defaultTitle={defaultTitle}
     >
-      <meta name="description" content={isAr ? "نصنع تجارب رقمية عالمية، من تطوير الويب المتطور إلى الهوية البصرية." : "We craft world-class digital experiences, from advanced web development to brand identity."} />
+      {/* Basic SEO */}
+      <meta name="description" content={description} />
+      <meta name="keywords" content={keywords} />
       
-      {/* Fallback Open Graph / Social Media Meta Tags */}
-      <meta property="og:site_name" content="Tungsten Creative" />
+      {/* 🚀 Dynamic Canonical URL (مهم جداً لمنع تكرار المحتوى) */}
+      <link rel="canonical" href={currentUrl} />
+
+      {/* Open Graph / Social Media */}
+      <meta property="og:site_name" content={siteName} />
       <meta property="og:type" content="website" />
+      <meta property="og:url" content={currentUrl} />
+      <meta property="og:title" content={defaultTitle} />
+      <meta property="og:description" content={description} />
+      <meta property="og:image" content="https://tungsten-media.com/img/og-image.jpg" />
+
+      {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:url" content={currentUrl} />
+      <meta name="twitter:title" content={defaultTitle} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content="https://tungsten-media.com/img/og-image.jpg" />
+
+      {/* Inject JSON-LD Schema */}
+      <script type="application/ld+json">
+        {JSON.stringify(schemaMarkup)}
+      </script>
     </Helmet>
   );
 };
@@ -68,7 +116,7 @@ const AnimatedRoutes = () => {
   return (
     <>
       <ScrollRefresh />
-      <GlobalSeo /> {/* 🚀 تفعيل إعدادات الـ SEO الافتراضية لكل الموقع */}
+      <GlobalSeo /> {/* 🚀 السيو المحدث يعمل هنا ويتفاعل مع تغيير المسار */}
       <AnimatePresence mode="wait">
         <Suspense fallback={<PageLoader />}>
           <Routes location={location} key={location.pathname}>
@@ -95,7 +143,7 @@ const App = () => (
               <TrackingProvider>
                 <SmoothScroll>
                   <div className="relative min-h-screen flex flex-col">
-                    <SkipToContent /> {/* ممتاز للـ Accessibility والـ SEO */}
+                    <SkipToContent /> 
                     <Preloader />
                     <CustomCursor />
                     <ScrollProgress />
