@@ -103,7 +103,7 @@ const Navbar = () => {
             </AnimatePresence>
             
             {/* --- NEW FEATURE: The Neon 'TUNGSTEN' Sign --- */}
-            <motion.div 
+            {/* <motion.div 
               className="hidden sm:flex flex-col justify-center"
               // The subtle continuous pulse
               animate={{ opacity: [0.8, 1, 0.8] }}
@@ -116,7 +116,7 @@ const Navbar = () => {
               }`}>
                 Tungsten
               </span>
-            </motion.div>
+            </motion.div> */}
           </Link>
 
           {/* Desktop Nav Links */}
