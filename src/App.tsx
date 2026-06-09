@@ -25,6 +25,7 @@ const About = lazy(() => import("@/pages/About"));
 const ServicesIndex = lazy(() => import("@/pages/ServicesIndex"));
 const ServiceDetail = lazy(() => import("@/pages/ServiceDetail"));
 const Contact = lazy(() => import("@/pages/Contact"));
+const Profile = lazy(() => import("@/pages/Profile"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
 
 const queryClient = new QueryClient();
@@ -111,6 +112,7 @@ const AnimatedRoutes = () => {
             <Route path="/services" element={<ServicesIndex />} />
             <Route path="/services/:slug" element={<ServiceDetail />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

@@ -5,7 +5,14 @@ export const translations: Record<string, Record<Lang, string>> = {
   "nav.about": { en: "About", ar: "من نحن" },
   "nav.services": { en: "Services", ar: "الخدمات" },
   "nav.contact": { en: "Contact", ar: "تواصل" },
-  "hero.title": { en: "We Power Brands Digitally", ar: "نمكّن العلامات التجارية رقمياً" },
+  "nav.profile": {
+    en: "Profile",
+    ar: "ملف الشركة",
+  },
+  "hero.title": {
+    en: "We Power Brands Digitally",
+    ar: "نمكّن العلامات التجارية رقمياً",
+  },
   "hero.subtitle": {
     en: "Strategy. Design. Technology. Results.",
     ar: "استراتيجية. تصميم. تكنولوجيا. نتائج.",
@@ -42,7 +49,10 @@ export const translations: Record<string, Record<Lang, string>> = {
   "contact.email": { en: "Email Address", ar: "البريد الإلكتروني" },
   "contact.message": { en: "Your Message", ar: "رسالتك" },
   "contact.send": { en: "Send Message", ar: "إرسال الرسالة" },
-  "contact.success": { en: "Message sent successfully!", ar: "تم إرسال الرسالة بنجاح!" },
+  "contact.success": {
+    en: "Message sent successfully!",
+    ar: "تم إرسال الرسالة بنجاح!",
+  },
   "footer.tagline": {
     en: "Illuminating brands through digital excellence.",
     ar: "إضاءة العلامات التجارية من خلال التميز الرقمي.",
@@ -61,4 +71,23 @@ export const translations: Record<string, Record<Lang, string>> = {
   "service.cta": { en: "Get Started", ar: "ابدأ الآن" },
   "service.back": { en: "All Services", ar: "جميع الخدمات" },
   "timeline.title": { en: "Our Journey", ar: "رحلتنا" },
+
+  "profile.title": { en: "Agency Profile", ar: "ملف الشركة" },
+  "profile.subtitle": { en: "The Digital Blueprint.", ar: "المخطط الرقمي." },
+  "profile.description": {
+    en: "Explore the essence of Tungsten Media. We are not just an agency, we are your creative and technical partner.",
+    ar: "استكشف جوهر تنجستين ميديا. نحن لسنا مجرد وكالة، نحن شريكك التكنولوجي والإبداعي.",
+  },
+  "profile.partners": { en: "Partners & Clients", ar: "الشركاء والعملاء" },
+  "profile.partners.desc": {
+    en: "Coming soon: An interactive exhibition of success stories for brands that trusted our solutions.",
+    ar: "قريباً: معرض تفاعلي يضم قصص نجاح أهم العلامات التجارية التي وثقت في حلولنا.",
+  },
+  "profile.download": { en: "Download PDF", ar: "تحميل نسخة PDF" },
+  "profile.status": { en: "Document Active", ar: "المستند نشط" },
+  "profile.open": { en: "Open Full", ar: "فتح بالكامل" },
+  // أضف هذه المفاتيح لملف الترجمات الخاص بك:
+  "feature.tech.title": { en: "Agile Tech", ar: "تقنيات رشيقة" },
+  "feature.tech.desc": { en: "...", ar: "..." },
+  // ... وهكذا لباقي الـ features
 };

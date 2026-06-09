@@ -18,6 +18,7 @@ const navLinks = [
   { key: "nav.about", path: "/about" },
   { key: "nav.services", path: "/services" },
   { key: "nav.contact", path: "/contact" },
+  { key: "nav.profile", path: "/profile" },
 ];
 
 const menuVariants: Variants = {
