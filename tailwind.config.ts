@@ -2,7 +2,12 @@ import type { Config } from "tailwindcss";
 
 export default {
   darkMode: ["class"],
-  content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
+  content: [
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -13,9 +18,13 @@ export default {
       },
     },
     extend: {
+      // في قسم theme.extend.fontFamily
       fontFamily: {
-        sans: ["Plus Jakarta Sans", "Cairo", "sans-serif"],
-        display: ["Plus Jakarta Sans", "Cairo", "sans-serif"],
+        // الفونت الأساسي للموقع
+        sans: ["Montserrat", "sans-serif"],
+        // فونت العناوين والأشياء الإبداعية
+        display: ["Righteous", "cursive"],
+        // فونت للعربي
         arabic: ["Cairo", "sans-serif"],
       },
       colors: {
