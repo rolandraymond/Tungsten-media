@@ -9,6 +9,8 @@ import { ThemeProvider } from "@/lib/context-theme";
 import { TrackingProvider } from "@/lib/tracking-provider";
 import { useTranslation } from "@/hooks/use-translation";
 
+// Layout & Components
+import WhatsAppButton from "@/components/layout/WhatsAppButton";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Preloader from "@/components/effects/Preloader";
@@ -28,17 +30,16 @@ const NotFound = lazy(() => import("@/pages/NotFound"));
 const queryClient = new QueryClient();
 
 // ==========================================
-// 1. Global SEO Component (النسخة الاحترافية)
+// 1. Global SEO Component
 // ==========================================
 const GlobalSeo = () => {
   const { lang } = useTranslation();
-  const location = useLocation(); // 🚀 جلب المسار الحالي لإنشاء الروابط الديناميكية
+  const location = useLocation();
   
   const isAr = lang === "ar";
   const siteName = "Tungsten Media Agency";
   const currentUrl = `https://tungsten-media.com${location.pathname}`;
 
-  // 🚀 نصوص مخصصة حسب اللغة لضمان أرشفة صحيحة في جوجل العربي والإنجليزي
   const defaultTitle = isAr 
     ? "تونجستين ميديا | وكالة تسويق رقمي وحلول برمجيات" 
     : "Tungsten Media Agency | Digital Marketing & Software Solutions";
@@ -51,7 +52,6 @@ const GlobalSeo = () => {
     ? "تسويق رقمي, ديجيتال ماركتنج, تطوير برمجيات, تصميم مواقع, Tungsten Media Agency, حلول سوفتوير"
     : "Digital Marketing, Software Development, Web Design, Tungsten Media Agency, Software Solutions";
 
-  // 🚀 WebSite Schema ليظهر الموقع بشكل احترافي مع مربع بحث في نتائج جوجل
   const schemaMarkup = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -66,39 +66,25 @@ const GlobalSeo = () => {
 
   return (
     <Helmet 
-      htmlAttributes={{ 
-        lang: isAr ? "ar" : "en", 
-        dir: isAr ? "rtl" : "ltr" 
-      }}
+      htmlAttributes={{ lang: isAr ? "ar" : "en", dir: isAr ? "rtl" : "ltr" }}
       titleTemplate={`%s | ${siteName}`}
       defaultTitle={defaultTitle}
     >
-      {/* Basic SEO */}
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
-      
-      {/* 🚀 Dynamic Canonical URL (مهم جداً لمنع تكرار المحتوى) */}
       <link rel="canonical" href={currentUrl} />
-
-      {/* Open Graph / Social Media */}
       <meta property="og:site_name" content={siteName} />
       <meta property="og:type" content="website" />
       <meta property="og:url" content={currentUrl} />
       <meta property="og:title" content={defaultTitle} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content="https://tungsten-media.com/img/og-image.jpg" />
-
-      {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:url" content={currentUrl} />
       <meta name="twitter:title" content={defaultTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content="https://tungsten-media.com/img/og-image.jpg" />
-
-      {/* Inject JSON-LD Schema */}
-      <script type="application/ld+json">
-        {JSON.stringify(schemaMarkup)}
-      </script>
+      <script type="application/ld+json">{JSON.stringify(schemaMarkup)}</script>
     </Helmet>
   );
 };
@@ -116,7 +102,7 @@ const AnimatedRoutes = () => {
   return (
     <>
       <ScrollRefresh />
-      <GlobalSeo /> {/* 🚀 السيو المحدث يعمل هنا ويتفاعل مع تغيير المسار */}
+      <GlobalSeo />
       <AnimatePresence mode="wait">
         <Suspense fallback={<PageLoader />}>
           <Routes location={location} key={location.pathname}>
@@ -148,9 +134,14 @@ const App = () => (
                     <CustomCursor />
                     <ScrollProgress />
                     <Navbar />
+                    
                     <main id="main-content" className="flex-grow">
                       <AnimatedRoutes />
                     </main>
+                    
+                    {/* 🚀 الـ WhatsApp Button ثابت هنا ليرافق المستخدم في كل الصفحات */}
+                    <WhatsAppButton />
+                    
                     <Footer />
                   </div>
                 </SmoothScroll>
