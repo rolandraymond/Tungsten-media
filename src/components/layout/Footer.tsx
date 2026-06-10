@@ -118,6 +118,7 @@ const Footer = () => {
                   { to: "/about", label: t("nav.about") },
                   { to: "/services", label: t("nav.services") },
                   { to: "/contact", label: t("nav.contact") },
+                  { to: "/profile", label: t("nav.profile") },
                 ].map((link, i) => (
                   <Link
                     key={link.to}

@@ -112,7 +112,7 @@ const Navbar = () => {
             <AnimatePresence mode="wait">
               <motion.img
                 key={theme}
-                src={theme === "dark" ? "/img/LogoDark.png" : "/img/LogoLight.png"}
+                src={theme === "dark" ? "/img/LogoDarkG.png" : "/img/LogoLightG.png"}
                 alt="Company Logo"
                 className="h-full w-auto object-contain transition-transform duration-300 group-hover:scale-105"
                 initial={{ opacity: 0, filter: "blur(4px)" }}
