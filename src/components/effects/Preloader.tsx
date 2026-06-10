@@ -120,6 +120,7 @@ const Preloader = () => {
                   animate={{ r: [0, 18, 30, 0], opacity: [0, 1, 1, 0] }}
                   transition={{ delay: 1.6, duration: 0.8 }}
                 />
+                
               </svg>
             </div>
 

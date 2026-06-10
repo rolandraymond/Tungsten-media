@@ -16,4 +16,8 @@
     <loc>https://tungsten-media.com/contact</loc>
     <priority>0.9</priority>
   </url>
+  <url>
+    <loc>https://tungsten-media.com/profile</loc>
+    <priority>0.7</priority>
+  </url>
 </urlset>
