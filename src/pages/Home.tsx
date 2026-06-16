@@ -1,4 +1,5 @@
 import Hero from "@/components/sections/Hero";
+import ServiceCard from "@/components/sections/ServiceCard";
 import ServicesGrid from "@/components/sections/ServicesGrid";
 import MetricsSection from "@/components/sections/MetricsSection";
 import Marquee from "@/components/sections/Marquee";
@@ -17,6 +18,7 @@ const Home = () => {
       <Marquee />
       <MetricsSection />
       <ServicesGrid />
+      <ServiceCard />
       <HorizontalShowcase />
       <CTASection />
     </PageTransition>
