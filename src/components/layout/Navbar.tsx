@@ -17,9 +17,10 @@ const navLinks = [
   { key: "nav.home", path: "/" },
   { key: "nav.about", path: "/about" },
   { key: "nav.services", path: "/services" },
-  { key: "nav.contact", path: "/contact" },
   { key: "nav.profile", path: "/profile" },
-];
+  { key: "nav.contact", path: "/contact" },
+  /* { key: "nav.elearning", path: "/elearning" }, */
+]; 
 
 const menuVariants: Variants = {
   initial: { opacity: 0, y: "-6%", scale: 0.98 },
@@ -91,7 +92,7 @@ const Navbar = () => {
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <motion.nav
-          className={`pointer-events-auto relative flex items-center justify-between rounded-full bg-background/75 backdrop-blur-2xl shadow-2xl transition-all duration-500 overflow-hidden border border-border/30 ${
+          className={`pointer-events-auto relative grid grid-cols-[auto_1fr_auto] items-center rounded-full bg-background/75 backdrop-blur-2xl shadow-2xl transition-all duration-500 overflow-hidden border border-border/30 ${
             isScrolled
               ? "py-2 px-3 sm:px-4 w-[96%] md:w-[85%] lg:w-[80%]"
               : "py-3 sm:py-4 px-3 sm:px-5 w-[100%] md:w-[90%] lg:w-[85%]"
@@ -105,6 +106,7 @@ const Navbar = () => {
           />
 
           {/* Logo */}
+          <div className="flex items-center ml-10 lg:ml-12">
           <Link
             to="/"
             className="relative z-10 flex items-center gap-2 sm:gap-3 group h-8 sm:h-10 shrink-0"
@@ -122,10 +124,11 @@ const Navbar = () => {
               />
             </AnimatePresence>
           </Link>
+          </div>
 
           {/* Desktop Nav */}
           <div
-            className="hidden md:flex items-center gap-1 lg:gap-2"
+            className="hidden md:flex items-center justify-center gap-1 lg:gap-2 px-6"
             onMouseLeave={() => setHoveredPath(null)}
           >
             {navLinks.map((link) => {
@@ -189,7 +192,7 @@ const Navbar = () => {
           </div>
 
           {/* Actions */}
-          <div className="flex items-center gap-2 sm:gap-3 relative z-10">
+          <div className="flex justify-end items-center gap-2 sm:gap-3 relative z-10">
             {/* Desktop only */}
             <div className="hidden md:flex items-center gap-2">
               <button
