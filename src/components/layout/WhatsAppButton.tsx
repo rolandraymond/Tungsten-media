@@ -50,7 +50,7 @@ const WhatsAppButton = () => {
   const [isHovered, setIsHovered] = useState(false);
   const { springX, springY, onMouseMove, onMouseLeave } = useMagnetic();
   
-  const phoneNumber = "201206399775";
+  const phoneNumber = "201288148848";
   const message = "Tungsten Media - We are ready to innovate.";
 
   return (
